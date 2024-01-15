@@ -37,7 +37,7 @@ export default function Dilution() {
 
     const volumeNeeded = (targetConc * targetVolume) / stockConc;
 
-    if (volumeNeeded === 0) {
+    if (volumeNeeded === 0 || Number.isNaN(volumeNeeded)) {
       setVolumeNeeded({
         value: "",
         unit: "",
@@ -85,8 +85,8 @@ export default function Dilution() {
           setUnits({ ...units, stockConcentrationUnit: event.target.value })
         }
       >
-        <option value="molar">Molar</option>
         <option value="millimolar">Millimolar</option>
+        <option value="molar">Molar</option>
       </select>
       <label htmlFor="targetConc">Target Concentration</label>
       <input
@@ -105,8 +105,8 @@ export default function Dilution() {
           setUnits({ ...units, targetConcentrationUnit: event.target.value })
         }
       >
-        <option value="molar">Molar</option>
         <option value="millimolar">Millimolar</option>
+        <option value="molar">Molar</option>
       </select>
       <label htmlFor="targetVolume">Final Volume</label>
       <input
@@ -125,9 +125,9 @@ export default function Dilution() {
           setUnits({ ...units, volumeUnit: event.target.value })
         }
       >
+        <option value="microliter">Microliter</option>
         <option value="milliliter">Milliliter</option>
         <option value="liter">Liter</option>
-        <option value="microliter">Microliter</option>
       </select>
       <button type="button" onClick={() => handleFindVolume()}>
         Find Stock Volume

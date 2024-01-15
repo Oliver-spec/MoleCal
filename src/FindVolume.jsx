@@ -1,50 +1,48 @@
 import { useState } from "react";
 
-export default function FindConcentration() {
+export default function FindVolume() {
   const [inputData, setInputData] = useState({
     formulaWeight: "",
     mass: "",
-    volume: "",
+    concentration: "",
   });
   const [units, setUnits] = useState({
-    massUnit: "milligram",
-    volumeUnit: "milliliter",
+    massUnit: "gram",
+    concUnit: "molar",
   });
-  const [concentration, setConcentration] = useState({
+  const [volume, setVolume] = useState({
     value: "",
     unit: "",
   });
 
-  function handleFindConcentration() {
-    let { formulaWeight, volume, mass } = inputData;
-    const { massUnit, volumeUnit } = units;
+  function handleFindVolume() {
+    let { formulaWeight, concentration, mass } = inputData;
+    const { massUnit, concUnit } = units;
 
     if (massUnit === "milligram") {
       mass *= 0.001;
     }
 
-    if (volumeUnit === "microliter") {
-      volume *= 0.000001;
-    } else if (volumeUnit === "milliliter") {
-      volume *= 0.001;
+    if (concUnit === "millimolar") {
+      concentration *= 0.001;
     }
 
-    const concentration = mass / formulaWeight / volume;
+    const volume = mass / concentration / formulaWeight;
 
-    if (concentration === 0 || Number.isNaN(concentration)) {
-      setConcentration({ value: "", unit: "" });
-    } else if (concentration < 0.001) {
-      setConcentration({
-        value: (concentration * 1000000).toPrecision(3),
-        unit: " Micromolar",
+    if (volume === 0 || Number.isNaN(volume)) {
+      setVolume({ value: "", unit: "" });
+    } else if (volume < 0.001) {
+      setVolume({
+        value: (volume * 1000000).toPrecision(3),
+        unit: " Microliter",
       });
-    } else if (concentration < 1) {
-      setConcentration({
-        value: (concentration * 1000).toPrecision(3),
-        unit: " Millimolar",
+    } else if (volume < 1) {
+      setVolume({
+        value: (volume * 1000).toPrecision(3),
+        unit: " Milliliter",
       });
     } else {
-      setConcentration({ value: concentration.toPrecision(3), unit: " Molar" });
+      setVolume({ value: volume.toPrecision(3), unit: " Liter" });
     }
   }
 
@@ -87,36 +85,35 @@ export default function FindConcentration() {
         <option value="milligram">Milligram</option>
         <option value="gram">Gram</option>
       </select>
-      <label htmlFor="volume">Volume</label>
+      <label htmlFor="conc">Concentration</label>
       <input
-        id="volume"
+        id="conc"
         type="text"
-        value={inputData.volume}
+        value={inputData.concentration}
         onChange={(event) => {
           if (/^\d*\.?\d*$/.test(event.target.value)) {
             setInputData({
               ...inputData,
-              volume: event.target.value,
+              concentration: event.target.value,
             });
           }
         }}
       />
       <select
-        value={units.volumeUnit}
+        value={units.concUnit}
         onChange={(event) =>
-          setUnits({ ...units, volumeUnit: event.target.value })
+          setUnits({ ...units, concUnit: event.target.value })
         }
       >
-        <option value="microliter">Microliter</option>
-        <option value="milliliter">Milliliter</option>
-        <option value="liter">Liter</option>
+        <option value="millimolar">Millimolar</option>
+        <option value="molar">Molar</option>
       </select>
-      <button type="button" onClick={() => handleFindConcentration()}>
-        Find Concentration
+      <button type="button" onClick={() => handleFindVolume()}>
+        Find Volume
       </button>
       <div>
-        {concentration.value}
-        {concentration.unit}
+        {volume.value}
+        {volume.unit}
       </div>
     </>
   );
