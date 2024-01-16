@@ -67,75 +67,102 @@ export default function Dilution() {
   }
 
   return (
-    <>
-      <label htmlFor="stockConc">Stock Concentration</label>
-      <input
-        id="stockConc"
-        type="text"
-        value={inputData.stockConc}
-        onChange={(event) => {
-          if (/^\d*\.?\d*$/.test(event.target.value)) {
-            setInputData({ ...inputData, stockConc: event.target.value });
-          }
-        }}
-      />
-      <select
-        value={units.stockConcentrationUnit}
-        onChange={(event) =>
-          setUnits({ ...units, stockConcentrationUnit: event.target.value })
-        }
-      >
-        <option value="millimolar">Millimolar</option>
-        <option value="molar">Molar</option>
-      </select>
-      <label htmlFor="targetConc">Target Concentration</label>
-      <input
-        id="targetConc"
-        type="text"
-        value={inputData.targetConc}
-        onChange={(event) => {
-          if (/^\d*\.?\d*$/.test(event.target.value)) {
-            setInputData({ ...inputData, targetConc: event.target.value });
-          }
-        }}
-      />
-      <select
-        value={units.targetConcentrationUnit}
-        onChange={(event) =>
-          setUnits({ ...units, targetConcentrationUnit: event.target.value })
-        }
-      >
-        <option value="millimolar">Millimolar</option>
-        <option value="molar">Molar</option>
-      </select>
-      <label htmlFor="targetVolume">Final Volume</label>
-      <input
-        id="targetVolume"
-        type="text"
-        value={inputData.targetVolume}
-        onChange={(event) => {
-          if (/^\d*\.?\d*$/.test(event.target.value)) {
-            setInputData({ ...inputData, targetVolume: event.target.value });
-          }
-        }}
-      />
-      <select
-        value={units.volumeUnit}
-        onChange={(event) =>
-          setUnits({ ...units, volumeUnit: event.target.value })
-        }
-      >
-        <option value="microliter">Microliter</option>
-        <option value="milliliter">Milliliter</option>
-        <option value="liter">Liter</option>
-      </select>
-      <button type="button" onClick={() => handleFindVolume()}>
-        Find Stock Volume
-      </button>
-      <div>
-        {volumeNeeded.value}
-        {volumeNeeded.unit}
+    <main className="flex flex-col border-2 border-black rounded-3xl p-7 w-1/3">
+      <div className="flex flex-col">
+        <label htmlFor="stockConc">Stock Concentration</label>
+        <div className="flex gap-5">
+          <input
+            className="border-2 border-black rounded-lg p-1 flex-1"
+            id="stockConc"
+            type="text"
+            value={inputData.stockConc}
+            onChange={(event) => {
+              if (/^\d*\.?\d*$/.test(event.target.value)) {
+                setInputData({ ...inputData, stockConc: event.target.value });
+              }
+            }}
+          />
+          <select
+            value={units.stockConcentrationUnit}
+            onChange={(event) =>
+              setUnits({ ...units, stockConcentrationUnit: event.target.value })
+            }
+          >
+            <option value="millimolar">Millimolar</option>
+            <option value="molar">Molar</option>
+          </select>
+        </div>
       </div>
-    </>
+      <div className="flex flex-col mt-5">
+        <label htmlFor="targetConc">Target Concentration</label>
+        <div className="flex gap-5">
+          <input
+            className="border-2 border-black rounded-lg p-1 flex-1"
+            id="targetConc"
+            type="text"
+            value={inputData.targetConc}
+            onChange={(event) => {
+              if (/^\d*\.?\d*$/.test(event.target.value)) {
+                setInputData({ ...inputData, targetConc: event.target.value });
+              }
+            }}
+          />
+          <select
+            value={units.targetConcentrationUnit}
+            onChange={(event) =>
+              setUnits({
+                ...units,
+                targetConcentrationUnit: event.target.value,
+              })
+            }
+          >
+            <option value="millimolar">Millimolar</option>
+            <option value="molar">Molar</option>
+          </select>
+        </div>
+      </div>
+      <div className="flex flex-col mt-5">
+        <label htmlFor="targetVolume">Final Volume</label>
+        <div className="flex gap-5">
+          <input
+            className="border-2 border-black rounded-lg p-1 flex-1"
+            id="targetVolume"
+            type="text"
+            value={inputData.targetVolume}
+            onChange={(event) => {
+              if (/^\d*\.?\d*$/.test(event.target.value)) {
+                setInputData({
+                  ...inputData,
+                  targetVolume: event.target.value,
+                });
+              }
+            }}
+          />
+          <select
+            value={units.volumeUnit}
+            onChange={(event) =>
+              setUnits({ ...units, volumeUnit: event.target.value })
+            }
+          >
+            <option value="microliter">Microliter</option>
+            <option value="milliliter">Milliliter</option>
+            <option value="liter">Liter</option>
+          </select>
+        </div>
+      </div>
+      <div className="flex mt-8 gap-3">
+        <button
+          className="bg-gray-400 text-white rounded-lg p-1 w-1/2 hover:bg-gray-600"
+          type="button"
+          onClick={() => handleFindVolume()}
+        >
+          Find Stock Volume
+        </button>
+        <div className="flex-1 text-center font-bold border-2 rounded-lg border-black">
+          {volumeNeeded.value}
+          {volumeNeeded.unit}
+        </div>
+      </div>
+    </main>
   );
 }

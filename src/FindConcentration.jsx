@@ -49,9 +49,10 @@ export default function FindConcentration() {
   }
 
   return (
-    <>
+    <main className="flex flex-col border-2 border-black rounded-3xl p-7 w-1/3">
       <label htmlFor="formulaWeight">Formula Weight</label>
       <input
+        className="border-2 border-black rounded-lg p-1"
         id="formulaWeight"
         type="text"
         value={inputData.formulaWeight}
@@ -64,60 +65,76 @@ export default function FindConcentration() {
           }
         }}
       />
-      <label htmlFor="mass">Mass</label>
-      <input
-        id="mass"
-        type="text"
-        value={inputData.mass}
-        onChange={(event) => {
-          if (/^\d*\.?\d*$/.test(event.target.value)) {
-            setInputData({
-              ...inputData,
-              mass: event.target.value,
-            });
-          }
-        }}
-      />
-      <select
-        value={units.massUnit}
-        onChange={(event) =>
-          setUnits({ ...units, massUnit: event.target.value })
-        }
-      >
-        <option value="milligram">Milligram</option>
-        <option value="gram">Gram</option>
-      </select>
-      <label htmlFor="volume">Volume</label>
-      <input
-        id="volume"
-        type="text"
-        value={inputData.volume}
-        onChange={(event) => {
-          if (/^\d*\.?\d*$/.test(event.target.value)) {
-            setInputData({
-              ...inputData,
-              volume: event.target.value,
-            });
-          }
-        }}
-      />
-      <select
-        value={units.volumeUnit}
-        onChange={(event) =>
-          setUnits({ ...units, volumeUnit: event.target.value })
-        }
-      >
-        <option value="microliter">Microliter</option>
-        <option value="milliliter">Milliliter</option>
-        <option value="liter">Liter</option>
-      </select>
-      <button type="button" onClick={() => handleFindConcentration()}>
-        Find Concentration
-      </button>
-      <div>
-        {concentration.value}
-        {concentration.unit}
+      <div className="flex flex-col mt-5">
+        <label htmlFor="mass">Mass</label>
+        <div className="flex gap-5">
+          <input
+            className="border-2 border-black rounded-lg p-1 flex-1"
+            id="mass"
+            type="text"
+            value={inputData.mass}
+            onChange={(event) => {
+              if (/^\d*\.?\d*$/.test(event.target.value)) {
+                setInputData({
+                  ...inputData,
+                  mass: event.target.value,
+                });
+              }
+            }}
+          />
+          <select
+            value={units.massUnit}
+            onChange={(event) =>
+              setUnits({ ...units, massUnit: event.target.value })
+            }
+          >
+            <option value="milligram">Milligram</option>
+            <option value="gram">Gram</option>
+          </select>
+        </div>
       </div>
-    </>
+      <div className="flex flex-col mt-5">
+        <label htmlFor="volume">Volume</label>
+        <div className="flex gap-5">
+          <input
+            className="border-2 border-black rounded-lg p-1 flex-1"
+            id="volume"
+            type="text"
+            value={inputData.volume}
+            onChange={(event) => {
+              if (/^\d*\.?\d*$/.test(event.target.value)) {
+                setInputData({
+                  ...inputData,
+                  volume: event.target.value,
+                });
+              }
+            }}
+          />
+          <select
+            value={units.volumeUnit}
+            onChange={(event) =>
+              setUnits({ ...units, volumeUnit: event.target.value })
+            }
+          >
+            <option value="microliter">Microliter</option>
+            <option value="milliliter">Milliliter</option>
+            <option value="liter">Liter</option>
+          </select>
+        </div>
+      </div>
+      <div className="flex mt-8 gap-3">
+        <button
+          className="bg-gray-400 text-white rounded-lg p-1 w-1/2 hover:bg-gray-600"
+          type="button"
+          onClick={() => handleFindConcentration()}
+        >
+          Find Concentration
+        </button>
+        <div className="flex-1 text-center font-bold border-2 rounded-lg border-black">
+          {concentration.value}
+          {concentration.unit}
+        </div>
+      </div>
+    </main>
   );
 }
