@@ -39,7 +39,7 @@ export default function FindMass() {
   }
 
   return (
-    <main className="flex flex-col border-2 border-black rounded-3xl p-7 w-1/3">
+    <main className="flex flex-col border-black rounded-3xl w-full lg:w-1/2">
       <label htmlFor="formulaWeight">Formula Weight</label>
       <input
         className="border-2 border-black rounded-lg p-1"
@@ -120,9 +120,11 @@ export default function FindMass() {
         >
           Find Mass
         </button>
-        <div className="flex-1 text-center font-bold border-2 rounded-lg border-black">
-          {mass.value}
-          {mass.unit}
+        <div className="flex-1 text-center font-bold border-2 rounded-lg border-black flex flex-col justify-center">
+          <div>
+            {mass.value}
+            {mass.unit}
+          </div>
         </div>
       </div>
     </main>

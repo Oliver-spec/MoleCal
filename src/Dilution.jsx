@@ -44,8 +44,7 @@ export default function Dilution() {
       });
     } else if (stockConc < targetConc) {
       setVolumeNeeded({
-        value:
-          "Target concentration must be lower than or equal to the stock concentration",
+        value: "",
         unit: "",
       });
     } else if (volumeNeeded < 0.001) {
@@ -67,7 +66,7 @@ export default function Dilution() {
   }
 
   return (
-    <main className="flex flex-col border-2 border-black rounded-3xl p-7 w-1/3">
+    <main className="flex flex-col border-black rounded-3xl w-full lg:w-1/2">
       <div className="flex flex-col">
         <label htmlFor="stockConc">Stock Concentration</label>
         <div className="flex gap-5">
@@ -158,9 +157,11 @@ export default function Dilution() {
         >
           Find Stock Volume
         </button>
-        <div className="flex-1 text-center font-bold border-2 rounded-lg border-black">
-          {volumeNeeded.value}
-          {volumeNeeded.unit}
+        <div className="flex-1 text-center font-bold border-2 rounded-lg border-black flex flex-col justify-center">
+          <div>
+            {volumeNeeded.value}
+            {volumeNeeded.unit}
+          </div>
         </div>
       </div>
     </main>

@@ -49,7 +49,7 @@ export default function FindConcentration() {
   }
 
   return (
-    <main className="flex flex-col border-2 border-black rounded-3xl p-7 w-1/3">
+    <main className="flex flex-col border-black rounded-3xl w-full lg:w-1/2">
       <label htmlFor="formulaWeight">Formula Weight</label>
       <input
         className="border-2 border-black rounded-lg p-1"
@@ -130,9 +130,11 @@ export default function FindConcentration() {
         >
           Find Concentration
         </button>
-        <div className="flex-1 text-center font-bold border-2 rounded-lg border-black">
-          {concentration.value}
-          {concentration.unit}
+        <div className="flex-1 text-center font-bold border-2 rounded-lg border-black flex flex-col justify-center">
+          <div>
+            {concentration.value}
+            {concentration.unit}
+          </div>
         </div>
       </div>
     </main>
