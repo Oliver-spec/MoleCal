@@ -42,7 +42,7 @@ export default function Dilution() {
         value: "",
         unit: "",
       });
-    } else if (stockConc < targetConc) {
+    } else if (Number(stockConc) < Number(targetConc)) {
       setVolumeNeeded({
         value: "",
         unit: "",
